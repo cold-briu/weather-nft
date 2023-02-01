@@ -1,7 +1,6 @@
 
 
-export const getLocation = async (successHandler: (pos: GeolocationPosition) => void): Promise<GeolocationPosition | null> => {
-	let location: GeolocationPosition | null = null;
+export const getLocation = async (successHandler: (pos: GeolocationPosition) => void): Promise<void> => {
 
 
 	const errorHandler = (err: GeolocationPositionError) => { throw new Error(JSON.stringify(err)) };
@@ -9,12 +8,4 @@ export const getLocation = async (successHandler: (pos: GeolocationPosition) => 
 
 
 	navigator.geolocation.getCurrentPosition(successHandler, errorHandler)
-
-	console.log(location);
-	if (location) {
-		console.log(location);
-		return location
-	} else {
-		throw new Error("Couldn't get granted location");
-	}
 }

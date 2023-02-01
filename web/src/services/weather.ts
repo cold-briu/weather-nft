@@ -19,6 +19,7 @@ export const getWeather = async (location: params) => {
 			q: `${latitude},${longitude}`
 		}
 	})
+
 	// TODO return type
-	return res.data.condition
+	return { condition: res.data.current.condition, location: res.data.location }
 }

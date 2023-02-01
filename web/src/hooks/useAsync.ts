@@ -17,10 +17,9 @@ const useAsync = <T>(asyncFunction: any): AsyncResult<T> => {
 		try {
 			setIsLoading(true)
 			const result = params ? await asyncFunction(params) : await asyncFunction()
-			console.log("exec");
 			setIsLoading(false)
 			setData(result)
-
+			
 		} catch (error) {
 			setIsLoading(false)
 			setError(JSON.stringify(error))

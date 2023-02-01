@@ -13,13 +13,14 @@ const Weater = () => {
 	} = useAsync<GeolocationPosition>(geolocation.getLocation)
 
 	// TODO return type
-	const { isLoading, error, data, executeCall: getWeather } = useAsync(weatherApi.getWeather)
+	const { isLoading, error, data, executeCall: getWeather } = useAsync<any>(weatherApi.getWeather)
 
 	useEffect(() => {
 
 		if (!locationData) {
 			getLocation(setlocationData)
 		}
+
 		if (!data && locationData) {
 			getWeather(locationData.coords)
 		}
@@ -27,9 +28,20 @@ const Weater = () => {
 
 	return (
 		<>
-			<span>weather container</span>
+			<span>Your weather:</span>
 			{isLoadingLocation || isLoading && <p>Loading...</p>}
-			{data && <p>data came</p>}
+			{data && <>
+				{console.log(data)}
+				<div className="card">
+					<div className="card-header">
+						<p>{data.condition.text} - {data.location.name}</p>
+					</div>
+					<div className="card-body">
+						<img src={data.condition.icon} alt="" width="48px" />
+						<span>{data.location.localtime}</span>
+					</div>
+				</div>
+			</>}
 			{locationError && <p>error_l: {locationError}</p>}
 			{error && <p>error: {error}</p>}
 		</>
