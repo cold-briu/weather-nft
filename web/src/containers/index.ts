@@ -1,4 +1,5 @@
-import Weather from "./wheater";
+
+import Weather from "./Wheater";
 export {
 	Weather
 }
