@@ -1,12 +1,16 @@
 import { Configuration, OpenAIApi } from "openai";
 const configuration = new Configuration({
-	apiKey: "process.env.OPENAI_API_KEY",
+	apiKey: process.env.REACT_APP_OPENAI_API_KEY,
 });
-export const openai = new OpenAIApi(configuration);
-export const generateImage = async (prompt: string) => await openai.createCompletion({
-	model: "text-davinci-003",
-	prompt,
-	temperature: 0,
-	max_tokens: 7,
-});
-// TODO return types
+
+export const generateImage = async (prompt: string) => {
+	const openai = new OpenAIApi(configuration);
+
+	let result = await openai.createImage({
+		prompt: prompt,
+		n: 1,
+		size: "256x256",
+	});
+	return result.data.data[0].url;
+	// TODO return types
+}
