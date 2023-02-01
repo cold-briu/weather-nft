@@ -15,9 +15,6 @@ function App() {
 
               <h1>weather nft</h1>
               <h6>made w/ love by sandusky.eth</h6>
-              <button className="btn btn-info">
-                Mint
-              </button>
               <hr />
               <Weather />
             </div>

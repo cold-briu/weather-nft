@@ -16,29 +16,34 @@ const Weater = () => {
 	const { isLoading, error, data, executeCall: getWeather } = useAsync<any>(weatherApi.getWeather)
 
 	useEffect(() => {
-
 		if (!locationData) {
 			getLocation(setlocationData)
 		}
+	}, [locationData])
 
+	const handleClick = () => {
 		if (!data && locationData) {
 			getWeather(locationData.coords)
 		}
-	}, [data, locationData])
+	}
 
 	return (
 		<>
-			<span>Your weather:</span>
+			<button className="btn btn-info mb-4" onClick={handleClick}>
+				Mint
+			</button>
 			{isLoadingLocation || isLoading && <p>Loading...</p>}
 			{data && <>
-				{console.log(data)}
+				<span>Your weather:</span>
 				<div className="card">
-					<div className="card-header">
-						<p>{data.condition.text} - {data.location.name}</p>
-					</div>
+					<img className="card-img-top w-50" src={data.condition.icon} />
+
 					<div className="card-body">
-						<img src={data.condition.icon} alt="" width="48px" />
-						<span>{data.location.localtime}</span>
+						<h4 className='card-title'>{data.condition.text}</h4>
+						<p className="card-text">
+							<span>{data.location.name} - {data.location.localtime}</span>
+
+						</p>
 					</div>
 				</div>
 			</>}
