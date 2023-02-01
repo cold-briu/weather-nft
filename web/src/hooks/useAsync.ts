@@ -11,14 +11,16 @@ export type AsyncResult<T> = {
 const useAsync = <T>(asyncFunction: any): AsyncResult<T> => {
 	const [isLoading, setIsLoading] = useState(false)
 	const [error, setError] = useState("")
-	const [data, setData] = useState({})
+	const [data, setData] = useState<any>()
 
 	const executeCall = async (params?: {}) => {
 		try {
 			setIsLoading(true)
 			const result = params ? await asyncFunction(params) : await asyncFunction()
+			console.log("exec");
 			setIsLoading(false)
 			setData(result)
+
 		} catch (error) {
 			setIsLoading(false)
 			setError(JSON.stringify(error))

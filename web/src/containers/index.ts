@@ -1,5 +1,5 @@
 
-import Weather from "./Wheater";
+import Weather from "./Weather";
 export {
 	Weather
 }

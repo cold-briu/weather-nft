@@ -1,4 +1,6 @@
 import React from 'react';
+import { Weather } from './containers';
+
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
               <button className="btn btn-info">
                 Mint
               </button>
+              <hr />
+              <Weather />
             </div>
           </div>
         </div>
