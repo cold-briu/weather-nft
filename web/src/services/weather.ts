@@ -4,9 +4,7 @@ import { config } from "../config";
 
 const api = Axios.create({
 	baseURL: config.weather.baseUrl,
-	params: {
-		KEY: config.weather.key
-	}
+
 })
 
 type params = {
@@ -15,13 +13,12 @@ type params = {
 }
 export const getWeather = async (location: params) => {
 	const { latitude, longitude } = location;
-	let res = await api.get(`/current`, {
+	let res = await api.get(`/current.json`, {
 		params: {
+			KEY: config.weather.key,
 			q: `${latitude},${longitude}`
 		}
 	})
-	console.log(res);
-
 	// TODO return type
 	return res.data.condition
 }
