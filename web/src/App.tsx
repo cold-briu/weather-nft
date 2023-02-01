@@ -3,8 +3,23 @@ import React from 'react';
 function App() {
   return (
     <>
-      <h1>weather nft</h1>
-      <h3>made w/ love by sandusky.eth</h3>
+      <div className="container">
+        <div className="row">
+          <div className="col-2 col-md-3"></div>
+          <div className="col-8 col-md-6">
+
+
+            <div className="d-flex flex-column">
+
+              <h1>weather nft</h1>
+              <h6>made w/ love by sandusky.eth</h6>
+              <button className="btn btn-info">
+                Mint
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }
