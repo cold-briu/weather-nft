@@ -9,17 +9,18 @@ import { mainnet, polygon, optimism, arbitrum } from 'wagmi/chains';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
 import React from 'react';
+import { config } from '../config';
 
 const { chains, provider } = configureChains(
 	[mainnet, polygon, optimism, arbitrum],
 	[
-		alchemyProvider({ apiKey: "process.env.ALCHEMY_ID" }),
+		alchemyProvider({ apiKey: config.rainbowkit.key }),
 		publicProvider()
 	]
 );
 
 const { connectors } = getDefaultWallets({
-	appName: 'My RainbowKit App',
+	appName: 'weather nft',
 	chains
 });
 

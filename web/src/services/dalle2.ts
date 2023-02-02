@@ -9,7 +9,8 @@ export const generateImage = async (prompt: string) => {
 	let result = await openai.createImage({
 		prompt: prompt,
 		n: 1,
-		size: "256x256",
+		// size: "256x256",
+		size: "512x512",
 	});
 	return result.data.data[0].url;
 	// TODO return types

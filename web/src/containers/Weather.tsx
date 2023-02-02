@@ -1,3 +1,4 @@
+import { ConnectButton } from '@rainbow-me/rainbowkit'
 import React, { useEffect, useState } from 'react'
 import { useAsync } from '../hooks'
 import { weather as weatherApi, geolocation, dallE2 } from '../services'
@@ -44,7 +45,8 @@ const Weater = () => {
 	// TODO split containers
 	return (
 		<>
-			<button disabled={loaders} className="btn btn-info mb-4" onClick={handleClick}>
+			<ConnectButton accountStatus="address" chainStatus="icon" showBalance={true} />
+			<button disabled={loaders} className="btn btn-info m-4" onClick={handleClick}>
 				{loaders ? "Loading..." : "Mint"}
 			</button>
 
