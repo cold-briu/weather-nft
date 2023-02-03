@@ -1,7 +1,7 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 import React, { useEffect, useState } from 'react'
 import { useAsync } from '../hooks'
-import { weather as weatherApi, geolocation, dallE2 } from '../services'
+import { weather as weatherApi, geolocation, dallE2, ipfs } from '../services'
 
 
 const Weater = () => {
@@ -21,7 +21,12 @@ const Weater = () => {
 	} = useAsync<GeolocationPosition>(geolocation.getLocation)
 
 	// TODO return type
-	const { isLoading, error, data, executeCall: getWeather } = useAsync<any>(weatherApi.getWeather)
+	const {
+		isLoading,
+		error: weatherError,
+		data: weatherData,
+		executeCall: getWeather
+	} = useAsync<any>(weatherApi.getWeather)
 
 	useEffect(() => {
 		if (!locationData) {
@@ -30,18 +35,27 @@ const Weater = () => {
 	}, [locationData])
 
 	useEffect(() => {
-		if (data) {
-			getGeneratedImage(`${data.location.name} with ${data.condition.text} weather at ${data.location.localtime}`)
+		if (weatherData) {
+			getGeneratedImage(`${weatherData.location.name} with ${weatherData.condition.text} weather at ${weatherData.location.localtime}`)
 		}
-	}, [data])
+	}, [weatherData])
+
+	useEffect(() => {
+		if (imgUrl) {
+			let output = ipfs.addFile(imgUrl)
+			console.log(output);
+
+		}
+	}, [imgUrl])
 
 	const handleClick = async () => {
-
-		if (!data && locationData) {
+		if (!weatherData && locationData) {
 			await getWeather(locationData.coords)
 		}
 	}
+
 	const loaders = isLoadingLocation || isLoading
+	const errors = locationError || weatherError || imgError
 	// TODO split containers
 	return (
 		<>
@@ -50,15 +64,15 @@ const Weater = () => {
 				{loaders ? "Loading..." : "Mint"}
 			</button>
 
-			{data && <>
+			{weatherData && <>
 				<span>Your weather:</span>
 				<div className="card">
-					<img className="card-img-top w-50" src={data.condition.icon} />
+					<img className="card-img-top w-50" src={weatherData.condition.icon} />
 
 					<div className="card-body">
-						<h4 className='card-title'>{data.condition.text}</h4>
+						<h4 className='card-title'>{weatherData.condition.text}</h4>
 						<p className="card-text">
-							<span>{data.location.name} - {data.location.localtime}</span>
+							<span>{weatherData.location.name} - {weatherData.location.localtime}</span>
 
 						</p>
 					</div>
@@ -66,8 +80,7 @@ const Weater = () => {
 			</>}
 			{isLoadingImg && <p>Loading...</p>}
 			{imgUrl && <img src={imgUrl} />}
-			{locationError && <p>error_l: {locationError}</p>}
-			{error && <p>error: {error}</p>}
+			{errors && <p>error: {errors}</p>}
 		</>
 	)
 }

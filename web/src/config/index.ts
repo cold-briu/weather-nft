@@ -1,10 +1,26 @@
+const safeConfig = (val?: string) => {
+	console.warn("missing key for confg");
+	return val ?? "NO_KEY"
+}
+
 export const config = {
 	weather: {
 		baseUrl: "http://api.weatherapi.com/v1",
-		key: "da295ad9629f406a98b81418230102"
-		// key: process.env.WEATHER_API_KEY
+		key: safeConfig(process.env.REACT_APP_WEATHER_API_KEY)
 	},
 	rainbowkit: {
-		key: "58_JtVS2gcLcmWNnOeyPp9GK5jtyu1eD"
+		key: safeConfig(process.env.REACT_APP_ALCHEMY_ID)
+	},
+	openai: {
+		key: safeConfig(process.env.REACT_APP_OPENAI_API_KEY)
+	},
+	ipfs: {
+		url: "https://ipfs.infura.io:5001/api/v0"
+	},
+	infrura: {
+		id: safeConfig(process.env.REACT_APP_INFRURA_ID),
+		key: safeConfig(process.env.REACT_APP_INFRURA_KEY),
+		url: safeConfig(process.env.REACT_APP_INFRURA_URL),
 	}
+
 }

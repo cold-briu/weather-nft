@@ -1,5 +1,4 @@
 import Axios from "axios";
-import { isConditionalExpression } from "typescript";
 import { config } from "../config";
 
 const api = Axios.create({
