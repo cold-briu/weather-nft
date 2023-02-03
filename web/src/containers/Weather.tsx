@@ -1,11 +1,26 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 import React, { useEffect, useState } from 'react'
 import { useAsync } from '../hooks'
-import { weather as weatherApi, geolocation, dallE2, ipfs } from '../services'
+import { weather as weatherApi, dallE2, ipfs } from '../services'
 
 
-const Weater = () => {
-	const [locationData, setlocationData] = useState<GeolocationPosition>()
+type props = {
+	locationData?: GeolocationPosition,
+}
+
+
+const Weater = ({ locationData }: React.PropsWithChildren<props>) => {
+
+
+	const {
+		isLoading,
+		error: weatherError,
+		data: weatherData,
+		executeCall: getWeather
+	} = useAsync<any>(weatherApi.getWeather)
+
+
+
 
 	const {
 		isLoading: isLoadingImg,
@@ -14,25 +29,8 @@ const Weater = () => {
 		executeCall: getGeneratedImage
 	} = useAsync<string>(dallE2.generateImage)
 
-	const {
-		isLoading: isLoadingLocation,
-		error: locationError,
-		executeCall: getLocation
-	} = useAsync<GeolocationPosition>(geolocation.getLocation)
 
-	// TODO return type
-	const {
-		isLoading,
-		error: weatherError,
-		data: weatherData,
-		executeCall: getWeather
-	} = useAsync<any>(weatherApi.getWeather)
 
-	useEffect(() => {
-		if (!locationData) {
-			getLocation(setlocationData)
-		}
-	}, [locationData])
 
 	useEffect(() => {
 		if (weatherData) {
@@ -54,8 +52,8 @@ const Weater = () => {
 		}
 	}
 
-	const loaders = isLoadingLocation || isLoading
-	const errors = locationError || weatherError || imgError
+	const loaders = isLoading
+	const errors = weatherError || imgError
 	// TODO split containers
 	return (
 		<>
