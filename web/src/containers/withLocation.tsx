@@ -12,7 +12,6 @@ const withLocation = <T,>(Child: ComponentType<T>) => (props: T) => {
 			executeCall(setlocationData)
 		}
 	}, [data])
-	console.log("w loc");
 
 	return (
 		<>
