@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export type AsyncResult<T> = {
 	executeCall: (params?: any) => void;
@@ -19,8 +19,9 @@ const useAsync = <T>(asyncFunction: any): AsyncResult<T> => {
 			const result = params ? await asyncFunction(params) : await asyncFunction()
 			setIsLoading(false)
 			setData(result)
-			
+
 		} catch (error) {
+			console.log("", error);
 			setIsLoading(false)
 			setError(JSON.stringify(error))
 		}

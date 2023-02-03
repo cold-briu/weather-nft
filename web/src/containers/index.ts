@@ -1,7 +1,10 @@
 
+import Minter from "./Minter";
 import withLocation from "./withLocation";
-import Weather from "./Weather";
+import withWallet from "./withWallet";
+
 export {
-	Weather,
-	withLocation
+	Minter,
+	withLocation,
+	withWallet
 }
