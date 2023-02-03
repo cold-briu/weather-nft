@@ -1,11 +1,19 @@
 import { Minter, withLocation, withWallet } from './containers';
+import { withDallE } from './containers/withDallE';
 import withWeather from './containers/withWeather';
 
 function App() {
-  const Composed = withLocation(withWallet(withWeather(Minter)))
+  const Composed = withLocation(
+    withWallet(
+      withWeather(
+        withDallE(
+          Minter
+        )
+      )
+    )
+  )
   return (
     <>
-
       <div className="container">
         <div className="row">
           <div className="col-2 col-md-3"></div>
@@ -20,7 +28,6 @@ function App() {
 
             </div>
           </div>
-
         </div>
       </div>
     </>

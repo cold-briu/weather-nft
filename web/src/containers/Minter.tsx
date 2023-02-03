@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
-import { useAsync } from '../hooks'
-import { dallE2, ipfs } from '../services'
+import { ipfs } from '../services'
 
 type props = {
 	imgUrl?: string, // TODO props weather data

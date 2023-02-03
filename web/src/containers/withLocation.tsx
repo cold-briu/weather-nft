@@ -1,6 +1,5 @@
 import { ComponentType, useEffect, useState } from 'react'
-import { Loader } from '../components'
-import Error from '../components/Error'
+import { Loader, Error } from '../components'
 import { useAsync } from '../hooks'
 import { geolocation } from '../services'
 

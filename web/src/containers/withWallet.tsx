@@ -7,7 +7,6 @@ import { rainbowkit } from "../services";
 const withWallet = <T,>(Child: ComponentType<T>) => (props: PropsWithChildren<T>) => {
 	const { isConnected, isConnecting, } = useAccount()
 
-	console.log("w wallet");
 	return (
 		<>
 			<rainbowkit.Provider>

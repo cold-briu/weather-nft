@@ -1,17 +1,16 @@
 import { ComponentType } from "react";
-import { Loader } from "../components";
-import Error from "../components/Error";
+import { Error, Loader, WeatherCard } from "../components";
 import { useAsync } from "../hooks";
 import { weather } from "../services";
 
 const withWeather = <T,>(Child: ComponentType<T>) => (props: T | any) => {
 	const { isLoading, error, data, executeCall } = useAsync<any>(weather.getWeather)
+
 	const handleClick = async () => {
 		if (!data && props.locationData) {
 			await executeCall(props.locationData.coords)
 		}
 	}
-	console.log("w weather");
 
 	return (
 		<>
@@ -22,17 +21,12 @@ const withWeather = <T,>(Child: ComponentType<T>) => (props: T | any) => {
 			{isLoading && <Loader />}
 			{data &&
 				<>
-					<p>Your weather:</p>
-					<div className="card">
-						<img className="card-img-top w-50" src={data.condition.icon} />
-
-						<div className="card-body">
-							<h4 className='card-title'>{data.condition.text}</h4>
-							<p className="card-text">
-								<span>{data.location.name} - {data.location.localtime}</span>
-							</p>
-						</div>
-					</div>
+					<WeatherCard
+						icon={data.condition.icon}
+						text={data.condition.text}
+						name={data.location.name}
+						localtime={data.location.localtime}
+					/>
 					<Child {...props} weatherData={data} />
 				</>
 			}
