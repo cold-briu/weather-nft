@@ -17,8 +17,9 @@ function App() {
           <div className="col-8 col-md-6">
             <div className="d-flex flex-column">
               <h1 className="display-6 fw-bolder" >🌥 weather nft 🌥</h1>
-              <h6 className="lead">🐶 by sandusky.eth ❤️</h6>
-              <p>This was deployed on the ArbitrumGoerli tesnet</p>
+              <h6 className="lead">🐶  by sandusky.eth ❤️</h6>
+              <p>This was deployed on the ArbitrumGoerli tesnet.</p>
+              <p>Remember to press the image to mint & save.</p>
               <div className="d-flex flex-row justify-content-evenly">
                 <a href="https://faucet.triangleplatform.com/arbitrum/goerli" target="_blank" className="btn btn-outline-secondary btn-sm">
                   Facucet
