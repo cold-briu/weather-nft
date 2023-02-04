@@ -14,18 +14,17 @@ function App() {
   )
   return (
     <>
-      <div className="container">
+      <div className="container text-light mt-4">
         <div className="row">
           <div className="col-2 col-md-3"></div>
           <div className="col-8 col-md-6">
             <div className="d-flex flex-column">
-              <h1>weather nft</h1>
-              <h6>made w/ love by sandusky.eth</h6>
+              <h1 className="fw-bolder" >🌥 weather nft 🌥</h1>
+              <h6>🌊 by sandusky.eth</h6>
               <hr />
               {
                 <Composed />
               }
-
             </div>
           </div>
         </div>

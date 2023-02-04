@@ -15,5 +15,5 @@ export const addFile = async (url: string) => {
 	const file = Buffer.from(res.data)
 	const created = await client.add(file);
 	const outputUrl = `https://ipfs.infura.io/ipfs/${created.path}`;
-	return outputUrl
+	return { outputUrl, file }
 }

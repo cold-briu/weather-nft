@@ -18,7 +18,6 @@ export const withDallE = <T,>(Child: ComponentType<T>) => (props: T | any) => {
 			{error && <Error msg={error} />}
 			{isLoading && <Loader />}
 			{data && <>
-				<img src={data} />
 				<Child {...props} imgUrl={data} />
 			</>
 			}

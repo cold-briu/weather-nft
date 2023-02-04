@@ -15,19 +15,21 @@ const withWeather = <T,>(Child: ComponentType<T>) => (props: T | any) => {
 
 	return (
 		<>
-			{error && <Error msg={error} />}
-			{isLoading && <Loader />}
-			{data &&
-				<>
-					<WeatherCard
-						icon={data.condition.icon}
-						text={data.condition.text}
-						name={data.location.name}
-						localtime={data.location.localtime}
-					/>
-					<Child {...props} weatherData={data} />
-				</>
-			}
+			<div className="mt-3 mb-3">
+				{error && <Error msg={error} />}
+				{isLoading && <Loader />}
+				{data &&
+					<>
+						<WeatherCard
+							icon={data.condition.icon}
+							text={data.condition.text}
+							name={data.location.name}
+							localtime={data.location.localtime}
+						/>
+						<Child {...props} weatherData={data} />
+					</>
+				}
+			</div>
 		</>
 	)
 }
