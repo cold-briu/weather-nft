@@ -21,6 +21,10 @@ export const config = {
 		id: safeConfig(process.env.REACT_APP_INFRURA_ID),
 		key: safeConfig(process.env.REACT_APP_INFRURA_KEY),
 		url: safeConfig(process.env.REACT_APP_INFRURA_URL),
+	},
+	alchemy: {
+		key: safeConfig(process.env.REACT_APP_ALCHEMY_KEY),
+		contractAddress: safeConfig(process.env.REACT_APP_ADDRESS)
 	}
 
 }

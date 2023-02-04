@@ -24,8 +24,6 @@ const Minter = ({ imgUrl }: props) => {
 		mint()
 	}
 
-
-
 	return (
 		<>
 			<button disabled={isLoading} className="btn btn-info m-1" onClick={handleClick}>

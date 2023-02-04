@@ -1,8 +1,9 @@
 
 import { ethers } from "ethers";
-import { LockAbi } from "../abi";
+import { Minter as MinterAbi } from "../abi";
+import { config } from "../config";
 // const CONTRACT_ADDRESS = "DEPLOYED_RINKEBY_CONTRACT_ADDRESS";
-const CONTRACT_ADDRESS = "0xe7f1725e7734ce288f8367e1bb143e90bb3f0512";
+
 
 export const mint = async (ipfsUrl: string) => {
 	const { ethereum } = window;
@@ -12,14 +13,13 @@ export const mint = async (ipfsUrl: string) => {
 		// TODO remove any
 		const provider = new ethers.providers.Web3Provider(ethereum as any);
 		const signer = provider.getSigner();
-		const connectedContract = new ethers.Contract(CONTRACT_ADDRESS, LockAbi, signer);
+		const connectedContract = new ethers.Contract(config.alchemy.contractAddress, MinterAbi, signer);
+		// TODO DYNAMIC TARGET ADDR
+		const addr = "0x89616831662c6d1978dfD97203F8C9202C8a733C"
+		console.log(addr, config.alchemy.contractAddress);
 
-		//Calling the actual function to mint NFT.
-		console.log("Going to pop wallet now to pay gas...")
-		let nftTxn = await connectedContract.mintWeatherNft();
+		let nftTxn = await connectedContract.mint(addr, ipfsUrl);
 
-		//Waiting for transaction to complete.
-		console.log("Mining...please wait.")
 		await nftTxn.wait();
 
 		console.log(`Mined, see transaction: https://arbitrum.etherscan.io/tx/${nftTxn.hash}`);

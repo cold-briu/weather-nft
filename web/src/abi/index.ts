@@ -1,5 +1,3 @@
-import LockAbi from "./Lock.json"
+import Minter from "./Minter.json";
 
-export {
-	LockAbi
-}
+export { Minter }
