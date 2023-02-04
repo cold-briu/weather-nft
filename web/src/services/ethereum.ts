@@ -15,13 +15,12 @@ export const mint = async (ipfsUrl: string) => {
 		const signer = provider.getSigner();
 		const connectedContract = new ethers.Contract(config.alchemy.contractAddress, MinterAbi, signer);
 		// TODO DYNAMIC TARGET ADDR
-		const addr = "0x89616831662c6d1978dfD97203F8C9202C8a733C"
-		console.log(addr, config.alchemy.contractAddress);
+		const addr = await signer.getAddress()
 
 		let nftTxn = await connectedContract.mint(addr, ipfsUrl);
 
 		await nftTxn.wait();
 
-		console.log(`Mined, see transaction: https://arbitrum.etherscan.io/tx/${nftTxn.hash}`);
+		return `https://goerli.arbiscan.io/tx/${nftTxn.hash}`
 	}
 }

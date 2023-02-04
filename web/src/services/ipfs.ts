@@ -11,8 +11,10 @@ const client = create({
 })
 
 export const addFile = async (url: string) => {
-	const res = await Axios.get(url)
-	const file = Buffer.from(res.data)
+	const res = await Axios.get(url, {
+		responseType: "arraybuffer",
+	})
+	const file = res.data
 	const created = await client.add(file);
 	const outputUrl = `https://ipfs.infura.io/ipfs/${created.path}`;
 	return { outputUrl, file }

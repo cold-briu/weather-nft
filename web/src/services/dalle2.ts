@@ -15,5 +15,4 @@ export const generateImage = async (prompt: string) => {
 	});
 
 	return result.data.data[0].url;
-	// TODO return types
 }

@@ -4,13 +4,13 @@ import { useAsync } from "../hooks";
 import { weather } from "../services";
 
 const withWeather = <T,>(Child: ComponentType<T>) => (props: T | any) => {
-	const { isLoading, error, data, executeCall } = useAsync<any>(weather.getWeather)
+	const { isLoading, error, data, executeCall, reset } = useAsync<any>(weather.getWeather)
 
 	useEffect(() => {
 		if (!data && props.locationData) {
 			executeCall(props.locationData.coords)
 		}
-	}, [])
+	}, [data])
 
 
 	return (
@@ -26,7 +26,7 @@ const withWeather = <T,>(Child: ComponentType<T>) => (props: T | any) => {
 							name={data.location.name}
 							localtime={data.location.localtime}
 						/>
-						<Child {...props} weatherData={data} />
+						<Child {...props} weatherData={data} resetWeather={reset} />
 					</>
 				}
 			</div>

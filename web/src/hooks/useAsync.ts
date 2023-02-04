@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 export type AsyncResult<T> = {
+	reset: () => void;
 	executeCall: (params?: any) => void;
 	isLoading: boolean;
 	error?: string;
@@ -27,8 +28,10 @@ const useAsync = <T>(asyncFunction: any): AsyncResult<T> => {
 		}
 	}
 
+	const reset = () => setData(null)
 
 	return {
+		reset,
 		executeCall,
 		isLoading,
 		error,

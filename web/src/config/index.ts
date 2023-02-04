@@ -5,7 +5,7 @@ const safeConfig = (val?: string) => {
 
 export const config = {
 	weather: {
-		baseUrl: "http://api.weatherapi.com/v1",
+		baseUrl: "https://api.weatherapi.com/v1",
 		key: safeConfig(process.env.REACT_APP_WEATHER_API_KEY)
 	},
 	rainbowkit: {
